@@ -1,3 +1,4 @@
+const Cachorro = require("./cachorro.js");
 const DataTypes = require("sequelize");
 const Sequelize = require("../database.js");
 
@@ -24,5 +25,21 @@ const Cliente = Sequelize.define(
     updatedAt: false,
   }
 );
+
+Cachorro.belongsTo(Cliente, {
+  as: "cliente",
+  foreignKey: {
+    name: "clienteId",
+    allowNull: false,
+  },
+});
+
+Cliente.hasMany(Cachorro, {
+  as: "cachorros",
+  foreignKey: {
+    name: "clienteId",
+    allowNull: false,
+  },
+});
 
 module.exports = Cliente;

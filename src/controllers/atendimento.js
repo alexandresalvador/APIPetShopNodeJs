@@ -1,12 +1,11 @@
-const ClienteService = require("../services/cliente");
-const service = new ClienteService();
+const AtendimentoService = require("../services/atendimento");
+const service = new AtendimentoService();
 
-class ClienteController {
-  
+class AtendimentoController {
   async GetAll(req, res) {
     try {
-      const clientes = await service.GetAll();
-      res.status(200).json(clientes);
+      const atendimentos = await service.GetAll();
+      res.status(200).json(atendimentos);
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -17,8 +16,8 @@ class ClienteController {
   async GetById(req, res) {
     try {
       const id = req.params.id;
-      const cliente = await service.GetById(id);
-      res.status(200).json(cliente);
+      const atendimentos = await service.GetById(id);
+      res.status(200).json(atendimentos);
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -28,11 +27,11 @@ class ClienteController {
 
   async Add(req, res) {
     try {
-      const cliente = req.body;
-      await service.Add(cliente);
+      const atendimento = req.body;
+      await service.Add(atendimento);
       res.status(201).json({
-        message: "cliente adicionado com sucesso!",
-        cliente: cliente,
+        message: "Atendimento adicionado com sucesso!",
+        atendimento: atendimento,
       });
     } catch (error) {
       res.status(500).json({
@@ -44,11 +43,11 @@ class ClienteController {
   async Update(req, res) {
     try {
       const id = req.params.id;
-      let cliente = await service.GetById(id);
-      cliente = req.body;
-      await service.Update(id, cliente);
+      let atendimento = await service.GetById(id);
+      atendimento = req.body;
+      await service.Update(id, atendimento);
       res.status(200).json({
-        message: "cliente atualizado com sucesso!",
+        message: "Atendimento atualizado com sucesso!",
       });
     } catch (error) {
       res.status(500).json({
@@ -62,7 +61,7 @@ class ClienteController {
       const id = req.params.id;
       await service.Delete(id);
       res.status(200).json({
-        message: "cliente deletado com sucesso!",
+        message: "Atendimento deletado com sucesso!",
       });
     } catch (error) {
       res.status(500).json({
@@ -72,4 +71,4 @@ class ClienteController {
   }
 }
 
-module.exports = ClienteController;
+module.exports = AtendimentoController;
